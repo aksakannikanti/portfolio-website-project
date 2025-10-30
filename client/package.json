@@ -5,7 +5,7 @@
   "homepage": "/",
   "scripts": {
     "start": "vite --host localhost --port 3000",
-    "build": "vite build",
+    "build": "vite build && cp public/_redirects dist/",
     "start-client": "cross-env NODE_ENV=production node src/simple-server.js"
   },
   "author": "Aziz Kammoun",
