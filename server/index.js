@@ -193,6 +193,9 @@ app.use("/api/", EdirCv);
 app.use("/api/", EditFooter);
 app.use("/api/", Contact);
 
-app.listen(BACKEND_PORT, "127.0.0.1", () => {
-  console.log(`Server Alive At port ${BACKEND_PORT}`);
+const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
+
+app.listen(BACKEND_PORT, HOST, () => {
+  console.log(`Server Alive At ${HOST}:${BACKEND_PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
