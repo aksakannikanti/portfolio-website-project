@@ -259,7 +259,13 @@ const LazyRoute = ({ importFunc }) => {
 
 function App() {
   return (
-    <BrowserRouter basename="">
+    <BrowserRouter 
+      basename=""
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <SEOManager />
       <Routes>
         <Route
