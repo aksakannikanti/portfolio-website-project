@@ -17,9 +17,11 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
-dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load .env from parent directory
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const BACKEND_PORT = process.env.BACKEND_PORT || 5000;
 const FRONTEND_PORT = process.env.FRONTEND_PORT || 3000;
@@ -168,6 +170,15 @@ app.get("/", (req, res) => {
   res.send("Server Alive");
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || "development"
+  });
+});
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api/", MainHomeData);
@@ -182,6 +193,9 @@ app.use("/api/", EdirCv);
 app.use("/api/", EditFooter);
 app.use("/api/", Contact);
 
-app.listen(BACKEND_PORT, "127.0.0.1", () => {
-  console.log(`Server Alive At port ${BACKEND_PORT}`);
+const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
+
+app.listen(BACKEND_PORT, HOST, () => {
+  console.log(`Server Alive At ${HOST}:${BACKEND_PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });

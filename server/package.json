@@ -4,8 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start-server": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "echo 'No build step required for Node.js backend'",
+    "test": "echo 'No tests specified'"
   },
   "keywords": [],
   "author": "Aziz Kammoun",

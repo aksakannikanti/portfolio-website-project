@@ -4,7 +4,7 @@
   "type": "module",
   "homepage": "/",
   "scripts": {
-    "dev": "vite --host localhost --port 3000",
+    "start": "vite --host localhost --port 3000",
     "build": "vite build",
     "start-client": "cross-env NODE_ENV=production node src/simple-server.js"
   },
